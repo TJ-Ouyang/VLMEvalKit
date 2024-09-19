@@ -66,10 +66,11 @@ class MiniCPM_V(BaseModel):
         prompt, image_path = self.message_to_promptimg(message, dataset=dataset)
         image = Image.open(image_path).convert('RGB')
         msgs = [{'role': 'user', 'content': prompt}]
-        if DATASET_TYPE(dataset) == 'MCQ':
-            max_new_tokens = 20
-        elif DATASET_TYPE(dataset) == 'Y/N':
-            max_new_tokens = 100
+        if dataset != None:
+            if DATASET_TYPE(dataset) == 'MCQ':
+                max_new_tokens = 200
+            elif DATASET_TYPE(dataset) == 'Y/N':
+                max_new_tokens = 3
         else:
             max_new_tokens = 1024
 
